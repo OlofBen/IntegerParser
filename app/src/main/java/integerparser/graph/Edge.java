@@ -48,8 +48,8 @@ public class Edge implements Graphable, Changeable{
     }
 
     @Override
-    public void changeBasedOnDirivative(double stepSize) {
-        weight.changeBasedOnDirivative(stepSize);        
+    public void changeOppositeGradient(double stepSize) {
+        weight.changeOppositeGradient(stepSize);        
     }
     
 }

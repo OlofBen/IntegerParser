@@ -6,5 +6,5 @@ public interface Changeable {
      * based om the dirivative
      * @param stepSize
      */
-    public void changeBasedOnDirivative(double stepSize);
+    public void changeOppositeGradient(double stepSize);
 }

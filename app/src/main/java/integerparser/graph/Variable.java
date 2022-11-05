@@ -13,8 +13,8 @@ public class Variable implements Graphable, Changeable{
     }
 
     @Override
-    public void changeBasedOnDirivative(double stepSize){
-        value += dirivative * stepSize;
+    public void changeOppositeGradient(double stepSize){
+        value -= dirivative * stepSize;
         dirivative = 0;
     }
 

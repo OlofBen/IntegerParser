@@ -53,9 +53,9 @@ public class Node implements Graphable, Changeable{
     }
 
     @Override
-    public void changeBasedOnDirivative(double stepSize) {
-        edges.forEach(e -> changeBasedOnDirivative(stepSize));
-        bias.changeBasedOnDirivative(stepSize);        
+    public void changeOppositeGradient(double stepSize) {
+        edges.forEach(e -> changeOppositeGradient(stepSize));
+        bias.changeOppositeGradient(stepSize);        
     }
     
 }
