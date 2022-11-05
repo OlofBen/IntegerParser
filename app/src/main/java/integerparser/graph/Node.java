@@ -11,6 +11,14 @@ public class Node implements Graphable, Changeable{
     private boolean hasCalculated = false;
     //TODO minimizing funktion e.g. sigmoid
 
+    public Node(List<Graphable> incoming) {
+        edges = new LinkedList<>();
+        bias = new Variable(Variable.biasInitValue);
+        incoming.forEach(
+            in -> edges.add(new Edge(in))
+        );
+    }
+
     @Override
     public double value() {
         return hasCalculated ? value : calculate();
