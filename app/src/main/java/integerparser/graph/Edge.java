@@ -1,6 +1,6 @@
 package integerparser.graph;
 
-public class Edge implements Graphable{
+public class Edge implements Graphable, Changeable{
 
     private boolean hasCalculated = false;
     private Variable weight;
@@ -45,6 +45,11 @@ public class Edge implements Graphable{
     @Override
     public void setDirivative(double dirivative) {
         this.dirivative += dirivative;       
+    }
+
+    @Override
+    public void changeBasedOnDirivative(double stepSize) {
+        weight.changeBasedOnDirivative(stepSize);        
     }
     
 }
