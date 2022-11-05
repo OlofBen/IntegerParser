@@ -1,6 +1,6 @@
 package integerparser.graph;
 
-public class Variable implements Graphable, Changeable{
+public class Variable implements Changeable{
 
     public static double weightInitValue = 1;
     public static double biasInitValue = 0;
@@ -13,8 +13,8 @@ public class Variable implements Graphable, Changeable{
     }
 
     @Override
-    public void changeBasedOnDirivative(double stepSize){
-        value += dirivative * stepSize;
+    public void changeOppositeGradient(double stepSize){
+        value -= dirivative * stepSize;
         dirivative = 0;
     }
 

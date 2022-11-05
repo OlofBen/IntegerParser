@@ -2,7 +2,7 @@ package integerparser.graph;
 
 import java.util.*;
 
-public class Node implements Graphable, Changeable{
+public class Node implements Changeable{
 
     private List<Edge> edges;
     private Variable bias;
@@ -10,6 +10,14 @@ public class Node implements Graphable, Changeable{
     private double dirivative = 0; 
     private boolean hasCalculated = false;
     //TODO minimizing funktion e.g. sigmoid
+
+    public Node(List<Graphable> incoming) {
+        edges = new LinkedList<>();
+        bias = new Variable(Variable.biasInitValue);
+        incoming.forEach(
+            in -> edges.add(new Edge(in))
+        );
+    }
 
     @Override
     public double value() {
@@ -45,9 +53,9 @@ public class Node implements Graphable, Changeable{
     }
 
     @Override
-    public void changeBasedOnDirivative(double stepSize) {
-        edges.forEach(e -> changeBasedOnDirivative(stepSize));
-        bias.changeBasedOnDirivative(stepSize);        
+    public void changeOppositeGradient(double stepSize) {
+        edges.forEach(e -> changeOppositeGradient(stepSize));
+        bias.changeOppositeGradient(stepSize);        
     }
     
 }
