@@ -2,7 +2,7 @@ package integerparser.graph;
 
 import java.util.*;
 
-public class Node implements Graphable, Changeable{
+public class Node implements Changeable{
 
     private List<Edge> edges;
     private Variable bias;

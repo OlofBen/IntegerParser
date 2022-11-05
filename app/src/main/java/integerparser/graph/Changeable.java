@@ -1,6 +1,6 @@
 package integerparser.graph;
 
-public interface Changeable {
+public interface Changeable extends Graphable{
     /**
      * Changes the component and/or the components children,
      * based om the dirivative

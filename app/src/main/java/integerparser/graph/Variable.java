@@ -1,6 +1,6 @@
 package integerparser.graph;
 
-public class Variable implements Graphable, Changeable{
+public class Variable implements Changeable{
 
     public static double weightInitValue = 1;
     public static double biasInitValue = 0;

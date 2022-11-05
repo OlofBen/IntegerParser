@@ -1,6 +1,6 @@
 package integerparser.graph;
 
-public class Edge implements Graphable, Changeable{
+public class Edge implements Changeable{
 
     private boolean hasCalculated = false;
     private Variable weight;
