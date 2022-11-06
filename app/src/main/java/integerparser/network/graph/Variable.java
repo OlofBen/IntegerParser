@@ -3,7 +3,7 @@ package integerparser.network.graph;
 public class Variable implements Changeable{
 
     public static double weightInitValue = 1;
-    public static double biasInitValue = 0;
+    public static double biasInitValue = 1;
 
     private double value;
     private double dirivative = 0;

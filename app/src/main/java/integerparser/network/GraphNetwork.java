@@ -62,11 +62,24 @@ public class GraphNetwork implements ImprovableNetwork {
 
     @Override
     public List<Double> calculate(List<Double> in) {
+        resetValues();
+        for (int i = 0; i < input.size(); i++) {
+            input.get(i).setValue(in.get(i));
+        }
         return 
             nodes.get(nodes.size() - 1)
             .stream()
             .map(n -> n.value())
             .collect(Collectors.toList());
+    }
+
+    public void resetValues(){
+        for (var list : nodes) {
+            for (Node node : list) {
+                node.reset();
+            }
+            
+        }
     }
 
     @Override
@@ -84,5 +97,13 @@ public class GraphNetwork implements ImprovableNetwork {
     public void nextGeneration(double stepSize) {
         // TODO Auto-generated method stub
         
+    }
+
+    public void printValues(){
+        for (var list : nodes) {
+            System.out.println();
+            list.forEach(n -> System.out.print(n.value() + ", "));
+                
+        }
     }
 }

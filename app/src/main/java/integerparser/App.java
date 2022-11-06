@@ -12,6 +12,8 @@ public class App {
 
     private void run() {
         var list = List.of(3, 10 , 2, 5);
-        new GraphNetwork(list);
+        var n = new GraphNetwork(list);
+        System.out.println(n.calculate(List.of(1.0,1.0,1.0))); 
+        n.printValues();
     }
 }
