@@ -2,16 +2,14 @@ package integerparser.network.graph;
 
 import java.util.*;
 
-public class Node implements Changeable{
+public class Node extends Calculable{
 
     private List<Edge> edges;
     private Variable bias;
-    private double value;
-    private double dirivative = 0; 
-    private boolean hasCalculated = false;
     //TODO minimizing funktion e.g. sigmoid
 
     public Node(List<Graphable> incoming) {
+        super();
         edges = new LinkedList<>();
         bias = new Variable(Variable.biasInitValue);
         incoming.forEach(
@@ -20,25 +18,14 @@ public class Node implements Changeable{
     }
 
     @Override
-    public double value() {
-        return hasCalculated ? value : calculate();
-    }
-
-    private double calculate(){
-        hasCalculated = true;
-        value = 
+    protected double calculate(){
+        var value = 
             edges.stream()
             .mapToDouble(e -> e.value())
             .sum();
         value += bias.value();
         return value;
-    }
-
-    @Override
-    public void reset() {
-        hasCalculated = false;
-        dirivative = 0;
-        edges.forEach(e -> e.reset());    
+        
     }
 
     @Override
@@ -48,14 +35,13 @@ public class Node implements Changeable{
     }
 
     @Override
-    public void setDirivative(double dirivative) {
-        this.dirivative += dirivative;        
+    protected void resetComponentes() {
+        edges.forEach(e -> e.reset());          
     }
 
     @Override
-    public void changeOppositeGradient(double stepSize) {
+    protected void oppositeGradient(double stepSize) {
         edges.forEach(e -> changeOppositeGradient(stepSize));
-        bias.changeOppositeGradient(stepSize);        
-    }
-    
+        bias.changeOppositeGradient(stepSize);          
+    }  
 }

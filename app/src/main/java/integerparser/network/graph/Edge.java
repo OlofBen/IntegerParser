@@ -1,12 +1,9 @@
 package integerparser.network.graph;
 
-public class Edge implements Changeable{
+public class Edge extends Calculable{
 
-    private boolean hasCalculated = false;
     private Variable weight;
     private Graphable child;
-    private double value;
-    private double dirivative;
 
     public Edge(Graphable child) {
         this.child = child;
@@ -19,21 +16,8 @@ public class Edge implements Changeable{
     }
 
     @Override
-    public double value() {
-        return hasCalculated ? value : calculate();
-    }
-
-    private double calculate() {
-        hasCalculated = true; 
-        value = child.value() * weight.value();
-        return value;
-    }
-
-    @Override
-    public void reset() {
-        hasCalculated = false;
-        dirivative = 0;
-                
+    protected double calculate() {
+        return child.value() * weight.value();
     }
 
     @Override
@@ -48,7 +32,10 @@ public class Edge implements Changeable{
     }
 
     @Override
-    public void changeOppositeGradient(double stepSize) {
+    protected void resetComponentes() {}
+
+    @Override
+    protected void oppositeGradient(double stepSize) {
         weight.changeOppositeGradient(stepSize);        
     }
     
