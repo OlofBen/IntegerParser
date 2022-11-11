@@ -11,9 +11,27 @@ public class App {
     }
 
     private void run() {
-        var list = List.of(3, 10 , 2, 5);
+        var list = List.of(3, 10 , 10, 10, 5);
         var n = new GraphNetwork(list);
-        System.out.println(n.calculate(List.of(1.0,1.0,1.0))); 
-        n.printValues();
+        var in = List.of(1.0, 0.4, 0.1);
+        var exp = List.of(1.0, 0.0, 0.5, 0.3, 1.0);
+        var first = n.calculate(in);
+        System.out.println(first);
+        var t1 = System.currentTimeMillis();
+        var stepSize = 1000.0;
+        while (System.currentTimeMillis() - t1 < 1000){
+            var diff = n.train(in, exp);
+            
+            n.train(in, exp);
+            n.train(in, exp);
+            n.train(in, exp);
+            n.train(in, exp);
+            n.train(in, exp);
+            n.train(in, exp);
+            n.train(in, exp);
+            System.out.println(diff);
+            n.nextGeneration(stepSize);
+            stepSize = stepSize * 0.8;
+        }
     }
 }

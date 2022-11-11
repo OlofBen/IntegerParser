@@ -10,6 +10,7 @@ public class GraphNetwork implements ImprovableNetwork {
 
     private List<Constatnt> input;
     private List<List<Node>> nodes;
+    private List<EndNode> endNodes; //Usted when improving the network  
     //How to do the final row.
  
     public static ImprovableNetwork load(){
@@ -22,6 +23,12 @@ public class GraphNetwork implements ImprovableNetwork {
         nodes = new LinkedList<>();
         rowOne(size);
         rowRest(size);
+        endRow(nodes.get(nodes.size() - 1));
+    }
+
+    private void endRow(List<Node> lastRow) {
+        endNodes = new LinkedList<>();
+        lastRow.forEach( x -> endNodes.add(new EndNode(x)));
     }
 
     private void rowZero(List<Integer> size) {
@@ -78,7 +85,6 @@ public class GraphNetwork implements ImprovableNetwork {
             for (Node node : list) {
                 node.reset();
             }
-            
         }
     }
 
@@ -89,14 +95,33 @@ public class GraphNetwork implements ImprovableNetwork {
 
     @Override
     public double train(List<Double> input, List<Double> expected) {
-        // TODO Auto-generated method stub
-        return 0;
+        resetValues();
+        for (int i = 0; i < input.size(); i++) {
+            this.input.get(i).setValue(input.get(i));
+        }
+        for (int i = 0; i < endNodes.size(); i++) {
+            endNodes.get(i).setExpected(expected.get(i));
+        }
+        var sum = endNodes.stream().mapToDouble(endNode -> endNode.value()).sum();
+        sendDirivatives();
+        return sum;
+    }
+
+    private void sendDirivatives() {
+        endNodes.forEach(x -> x.dirive());
+        for (int i = nodes.size() - 1; i >= 0 ; i--) {
+            nodes.get(i).forEach(n -> n.dirive());
+        }
     }
 
     @Override
     public void nextGeneration(double stepSize) {
-        // TODO Auto-generated method stub
-        
+        nodes.forEach( 
+            x -> 
+            x.forEach(
+                n -> 
+                n.changeOppositeGradient(stepSize))
+        );        
     }
 
     public void printValues(){
