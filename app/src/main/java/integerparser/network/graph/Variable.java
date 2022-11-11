@@ -2,8 +2,8 @@ package integerparser.network.graph;
 
 public class Variable implements Changeable{
 
-    public static double weightInitValue = 1;
-    public static double biasInitValue = 1;
+    public static double weightInitValue = 0.5;
+    public static double biasInitValue = 0;
 
     private double value;
     private double dirivative = 0;

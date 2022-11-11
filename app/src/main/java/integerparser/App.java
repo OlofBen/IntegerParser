@@ -2,7 +2,9 @@ package integerparser;
 
 import java.util.List;
 
+import integerparser.input.Frame;
 import integerparser.network.GraphNetwork;
+import integerparser.network.NetworkTrainer;
 
 
 public class App {
@@ -13,25 +15,14 @@ public class App {
     private void run() {
         var list = List.of(3, 10 , 10, 10, 5);
         var n = new GraphNetwork(list);
-        var in = List.of(1.0, 0.4, 0.1);
-        var exp = List.of(1.0, 0.0, 0.5, 0.3, 1.0);
+        var in = List.of(1.0, 0.6, 0.2);
+        var exp = List.of(0.5, 0.5, 0.5, 0.5, 0.5);
         var first = n.calculate(in);
         System.out.println(first);
-        var t1 = System.currentTimeMillis();
-        var stepSize = 1000.0;
-        while (System.currentTimeMillis() - t1 < 1000){
-            var diff = n.train(in, exp);
-            
-            n.train(in, exp);
-            n.train(in, exp);
-            n.train(in, exp);
-            n.train(in, exp);
-            n.train(in, exp);
-            n.train(in, exp);
-            n.train(in, exp);
-            System.out.println(diff);
-            n.nextGeneration(stepSize);
-            stepSize = stepSize * 0.8;
-        }
+        var trainer = new NetworkTrainer( () -> new Frame(in, exp));
+        trainer.runFor(n, 200);
+        var last = n.calculate(in);
+        System.out.println(last);
+        
     }
 }
