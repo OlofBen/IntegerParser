@@ -1,4 +1,4 @@
-package integerparser.graph;
+package integerparser.network.graph;
 
 public interface Changeable extends Graphable{
     /**
