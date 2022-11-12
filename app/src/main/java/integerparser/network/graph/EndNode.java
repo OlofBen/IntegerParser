@@ -11,6 +11,9 @@ public class EndNode extends Calculable{
     }
 
     public void setExpected(double value) {
+
+        reset();
+
         expected.setValue(value);
     }
 
