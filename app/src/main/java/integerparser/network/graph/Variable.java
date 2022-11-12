@@ -9,6 +9,7 @@ public class Variable implements Changeable{
         return Math.random() * 2 -1;
     };
 
+
     private double value;
     private double dirivative = 0;
 

@@ -67,19 +67,24 @@ public class GraphNetwork implements ImprovableNetwork {
         return out;
     }
 
+
     
     
     private void calculate(List<Double> in) {
+=======
+
         resetValues();
         for (int i = 0; i < input.size(); i++) {
             input.get(i).setValue(in.get(i));
         }
+
         for (var nodeList : nodes) {
             nodeList
             .stream()
             .parallel()
             .forEach(x -> x.value());
         }
+
     }
 
     public void resetValues(){
@@ -97,7 +102,9 @@ public class GraphNetwork implements ImprovableNetwork {
 
     @Override
     public double train(List<Double> input, List<Double> expected) {
+
         calculate(input);
+
         for (int i = 0; i < endNodes.size(); i++) {
             endNodes.get(i).setExpected(expected.get(i));
         }
@@ -131,6 +138,7 @@ public class GraphNetwork implements ImprovableNetwork {
         }
     }
 
+
     @Override
     public List<Double> value(List<Double> in) {
         calculate(in);
@@ -140,4 +148,5 @@ public class GraphNetwork implements ImprovableNetwork {
             .map(x -> x.value())
             .collect(Collectors.toList());
     }
+
 }

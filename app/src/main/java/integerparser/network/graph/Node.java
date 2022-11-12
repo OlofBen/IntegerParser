@@ -14,7 +14,9 @@ public class Node extends Calculable{
     public Node(List<Graphable> incoming) {
         super();
         edges = new LinkedList<>();
+
         bias = new Variable(Variable.biasInitValue());
+
         incoming.forEach(
             in -> edges.add(new Edge(in))
         );

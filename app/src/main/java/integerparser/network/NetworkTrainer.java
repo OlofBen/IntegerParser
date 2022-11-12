@@ -6,7 +6,9 @@ public class NetworkTrainer {
     private int numberOfTrainingTimes = 100;
     private int generation = 0;
     private InputParser inputParser;
+
     private double stepSize = 0.10;
+
     private double stepDecay = 1;
     
     public NetworkTrainer(InputParser inputParser) {
@@ -27,7 +29,9 @@ public class NetworkTrainer {
         }
         avrage = avrage/numberOfTrainingTimes;
         System.out.println(avrage);
+
         network.nextGeneration(stepSize/numberOfTrainingTimes);
+
         stepSize *= stepDecay;
         
     }

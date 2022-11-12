@@ -7,7 +7,9 @@ public class Edge extends Calculable{
 
     public Edge(Graphable child) {
         this.child = child;
+
         weight = new Variable(Variable.weightInitValue());
+
     }
     
     public Edge(Graphable child, double weight) {
