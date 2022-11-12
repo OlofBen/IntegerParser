@@ -8,7 +8,7 @@ public interface Network {
      * @param in inputs
      * @return endnodes in network
      */
-    public List<Double> calculate(List<Double> in);
+    public List<Double> value(List<Double> in);
 
     /**
      * Saves the network in a textfile
